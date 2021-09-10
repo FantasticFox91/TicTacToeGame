@@ -4,11 +4,7 @@ let gameBoard = {
 
 let displayController
 
-const createPlayer = ({ userName}) => ({
-    userName,
-    score: 0,
-    setUserName (userNmae){
-        this.userName = userName;
-        return this
-    }
-});
+const userFactory = (name) => {
+    this.score = 0;
+    return {name, score}
+}
