@@ -12,6 +12,11 @@
     <main>
         <section>
             <article>
+                <div class="game-board-table">
+                    <div class="player">
+                <h2>Player 1</h2>
+                <p>Scores: <span class="winner-spot-player1">&#10003;&#10003&#10003</span></p>
+                </div>
                 <table>
                 <tr>
                     <td class='cell' data-num='0'><button></button></td>
@@ -29,7 +34,46 @@
                     <td class='cell' data-num='8'><button></button></td>
                 </tr>
                 </table>
-                <button class="reset">Reset</button>
+                <div class="player">
+                <h2>Player 2</h2>
+                <p>Scores: <span class="winner-spot-player2">&#215;&#215;&#215;</span></p>
+            </div>
+            </div>
+            </article>
+            <article class="modal new-game hidden">
+                <div class="modal-block">
+                    <h2>Start your game</h2>
+                    <form action="POST">
+                    <label for="username"><p>What's your name, Player 1?</p> <input type="text" size="10"></label>
+                    <label for="gameMode" id="gameMode">
+                        <p>Who will be your oppenent?</p>
+                        AI<input type="radio" name="gameMode" value="AI" id="gameModeAI" checked>
+                        Human<input type="radio" name="gameMode" value="Human" id="gameModeHuman">
+                    </label>
+                    <label for="" id='AIlvl'>
+                        <p>Choose AI level</p>
+                        <select name="" id="">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </label>
+                    <button id="start">Start your journey</button>
+                    </form>
+                </div>
+                
+            </article>
+            <article class="modal hidden end-game">
+                <div class="modal-block end-game-form">
+                    <form action="POST">
+                        <h2>Congrats!!! The Winner is </h2>
+                        <p class="winner">Player 1</p>
+                        <div class="wrapper">
+                            <button class="new-round-btn">New Round</button>
+                            <button class="new-game-btn">New Game</button>
+                        </div>
+                    </form>
+                </div>
             </article>
         </section>
     </main>

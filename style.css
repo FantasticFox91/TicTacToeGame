@@ -14,13 +14,20 @@ header{
     width:100%;
 }
 
+
 main{
     width: 100%;
 }
 
+.game-board-table{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 table{
-    margin: 0 auto;
     border-collapse:collapse;
+    margin:30px
 }
 
 table button{
@@ -68,6 +75,48 @@ table tr td button{
     
 }
 
-table tr td button:active{
-    background-color:aqua;
+
+
+.modal{
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal-block{
+    position:absolute;
+    left:40%;
+    top:20%;
+    background-color: rgb(85, 85, 207) ;
+    padding: 10px;
+    border-radius:15px;
+}
+
+.modal-block h2{
+    text-align: center;
+}
+
+#start{
+    display:block;
+    margin: 10px auto;
+    
+}
+
+.winner{
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-style: italic;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.hidden{
+    visibility: hidden;
 }
