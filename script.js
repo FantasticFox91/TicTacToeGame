@@ -4,18 +4,21 @@ let gameBoard = {
             "","",""],
 }
 
-
 const newGameForm = document.querySelector('.new-game');
 const endGameForm = document.querySelector('.end-game');
 const newRoundBtn = document.querySelector('.new-round-btn');
 const newGameBtn = document.querySelector('.new-game-btn');
-const checkMark = "&#10003";
-const crossMark = "&#215";
+const resetGameBtn = document.querySelector('.reset-btn');
+const player1NameShow = document.querySelector('.player1ShowName');
+const player2NameShow = document.querySelector('.player2ShowName');
+const player1Input = document.querySelector('#player1')
+let count = 0;
+const btns = document.querySelectorAll('.cell');
+
 
 function toggleHidden(block){
     block.classList.toggle('hidden');
 }
-
 
 function newGame(){
     resetGame();
@@ -24,55 +27,57 @@ function newGame(){
 
 function checkResult(){
     if(gameBoard.board[0] === 'X' && gameBoard.board[1] === 'X' && gameBoard.board[2] === 'X'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm);
     }
     if(gameBoard.board[3] === 'X' && gameBoard.board[4] === 'X' && gameBoard.board[5] === 'X'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[6] === 'X' && gameBoard.board[7] === 'X' && gameBoard.board[8] === 'X'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[0] === 'X' && gameBoard.board[3] === 'X' && gameBoard.board[6] === 'X'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[1] === 'X' && gameBoard.board[4] === 'X' && gameBoard.board[7] === 'X'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[2] === 'X' && gameBoard.board[5] === 'X' && gameBoard.board[8] === 'X'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[0] === 'X' && gameBoard.board[4] === 'X' && gameBoard.board[8] === 'X'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[2] === 'X' && gameBoard.board[4] === 'X' && gameBoard.board[6] === 'X'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     //
     if(gameBoard.board[0] === 'O' && gameBoard.board[1] === 'O' && gameBoard.board[2] === 'O'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[3] === 'O' && gameBoard.board[4] === 'O' && gameBoard.board[5] === 'O'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[6] === 'O' && gameBoard.board[7] === 'O' && gameBoard.board[8] === 'O'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[0] === 'O' && gameBoard.board[3] === 'O' && gameBoard.board[6] === 'O'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[1] === 'O' && gameBoard.board[4] === 'O' && gameBoard.board[7] === 'O'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[2] === 'O' && gameBoard.board[5] === 'O' && gameBoard.board[8] === 'O'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[0] === 'O' && gameBoard.board[4] === 'O' && gameBoard.board[8] === 'O'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
     if(gameBoard.board[2] === 'O' && gameBoard.board[4] === 'O' && gameBoard.board[6] === 'O'){
-        endGameForm.classList.remove('hidden')
+        toggleHidden(endGameForm)
     }
-
+    if(gameBoard.board.indexOf('') === -1){
+        toggleHidden(endGameForm)
+    }
 }
 
 function resetGame(){
@@ -86,16 +91,10 @@ function drawGameFromObject(){
     }
 }
 
-let displayController
-
 const userFactory = (name) => {
     this.score = 0;
     return {name, score}
 }
-
-let count = 0;
-
-const btns = document.querySelectorAll('.cell');
 
 btns.forEach(item => item.addEventListener('click',() =>{
     if(item.textContent === ""){
@@ -111,7 +110,6 @@ btns.forEach(item => item.addEventListener('click',() =>{
     checkResult();     
 }}}))
 
-
 document.querySelector('#gameMode').addEventListener('change',()=> {
     if(event.target.value === "Human"){
         document.querySelector('#AIlvl').remove()
@@ -121,6 +119,9 @@ document.querySelector('#gameMode').addEventListener('change',()=> {
         let br = document.createElement('br');
         p.textContent = "What's your name, Player 2? ";
         input.size = 10;
+        input.id = "player2"
+        input.pattern = "[A-Za-z]{1,30}";
+        input.required = true;
         label.appendChild(p);
         label.appendChild(input);
         label.appendChild(br);
@@ -153,13 +154,47 @@ document.querySelector('#gameMode').addEventListener('change',()=> {
     }
 })
 
-document.querySelector('#start').addEventListener('click',(e) => {
-    e.preventDefault();
-    toggleHidden(newGameForm);
-})
+document.querySelector('#start').onclick = (e) =>{
+    let gameModeChosen = document.querySelector('#gameModeHuman').checked
+    if(gameModeChosen){
+        if(player1Input.validity.patternMismatch && document.querySelector('#player2').validity.patternMismatch){
+            player1Input.setCustomValidity('Wrong name. Did you use english letters?');
+            document.querySelector('#player2').setCustomValidity('Wrong name. Did you use english letters?');
+        }else if(player1Input.validity.patternMismatch && !document.querySelector('#player2').validity.patternMismatch){
+            player1Input.setCustomValidity('Wrong name. Did you use english letters?');   
+        }else if(!player1Input.validity.patternMismatch && document.querySelector('#player2').validity.patternMismatch){
+            document.querySelector('#player2').setCustomValidity('Wrong name. Did you use english letters?');
+        }else{
+            e.preventDefault();
+            let player1Name = document.querySelector('#player1').value;
+            player2NameShow.textContent = "Computer"
+            if(player1Name.length > 0){
+            player1Name = player1Name[0].toUpperCase() + player1Name.slice(1);
+            }
+            let player2Name = document.querySelector('#player2').value;
+            player2Name = player2Name[0].toUpperCase() + player2Name.slice(1);
+            player2NameShow.textContent = player2Name;
+            toggleHidden(newGameForm);
+            player1NameShow.textContent = player1Name; 
+        }
+    }else{
+        if(player1Input.validity.patternMismatch){
+            player1Input.setCustomValidity('Wrong name. Did you use english letters?');
+        }else{
+        e.preventDefault();
+        let player1Name = document.querySelector('#player1').value;
+        player2NameShow.textContent = "Computer"
+        if(player1Name.length > 0){
+        player1Name = player1Name[0].toUpperCase() + player1Name.slice(1);
+        toggleHidden(newGameForm);
+        player1NameShow.textContent = player1Name; 
+        } 
+        }
+    }
+}
 
 newGameBtn.addEventListener('click',(e) =>{
-    e.preventDefault();
+    e.preventDefault()
     toggleHidden(endGameForm);
     resetGame();
     toggleHidden(newGameForm)
@@ -170,3 +205,9 @@ newRoundBtn.addEventListener('click',(e) =>{
     toggleHidden(endGameForm)
     resetGame()
 })
+
+resetGameBtn.addEventListener('click', () => {
+    toggleHidden(newGameForm)
+})
+
+

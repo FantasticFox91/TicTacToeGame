@@ -14,8 +14,8 @@
             <article>
                 <div class="game-board-table">
                     <div class="player">
-                <h2>Player 1</h2>
-                <p>Scores: <span class="winner-spot-player1">&#10003;&#10003&#10003</span></p>
+                <h2 class="player1ShowName">Player 1</h2>
+                <p>Scores: <span class="winner-spot-player1"></span></p>
                 </div>
                 <table>
                 <tr>
@@ -35,30 +35,33 @@
                 </tr>
                 </table>
                 <div class="player">
-                <h2>Player 2</h2>
-                <p>Scores: <span class="winner-spot-player2">&#215;&#215;&#215;</span></p>
+                <h2 class="player2ShowName">Computer</h2>
+                <p>Scores: <span class="winner-spot-player2"></span></p>
             </div>
+            
             </div>
+            <button class="reset-btn">New game</button>
             </article>
-            <article class="modal new-game hidden">
+            <article class="modal new-game">
                 <div class="modal-block">
                     <h2>Start your game</h2>
-                    <form action="POST">
-                    <label for="username"><p>What's your name, Player 1?</p> <input type="text" size="10"></label>
-                    <label for="gameMode" id="gameMode">
-                        <p>Who will be your oppenent?</p>
-                        AI<input type="radio" name="gameMode" value="AI" id="gameModeAI" checked>
-                        Human<input type="radio" name="gameMode" value="Human" id="gameModeHuman">
-                    </label>
-                    <label for="" id='AIlvl'>
-                        <p>Choose AI level</p>
-                        <select name="" id="">
-                            <option value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="expert">Expert</option>
-                        </select>
-                    </label>
-                    <button id="start">Start your journey</button>
+                    <form >
+                        <p>What's your name, Player 1?</p> 
+                        <input type="text" size="10" id="player1" required pattern="[A-Za-z]{1,30}" >
+                        <label for="gameMode" id="gameMode">
+                            <p>Who will be your oppenent?</p>
+                            AI<input type="radio" name="gameMode" value="AI" id="gameModeAI" checked>
+                            Human<input type="radio" name="gameMode" value="Human" id="gameModeHuman">
+                        </label>
+                        <label for="" id='AIlvl'>
+                            <p>Choose AI level</p>
+                            <select name="" id="">
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="expert">Expert</option>
+                            </select>
+                        </label>
+                        <button id="start">Start your journey</button>
                     </form>
                 </div>
                 
